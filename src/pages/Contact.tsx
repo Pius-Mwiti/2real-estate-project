@@ -1,4 +1,3 @@
-
 import React from 'react';
 import RealEstateHeader from '@/components/RealEstateHeader';
 import RealEstateFooter from '@/components/RealEstateFooter';
@@ -17,7 +16,7 @@ const Contact = () => {
           <div className="text-center mb-10">
             <h1 className="text-3xl font-bold tracking-tight">Contact Us</h1>
             <p className="text-muted-foreground mt-2">
-              Get in touch with Ezekiel Wangila Real Estate for property inquiries
+              Get in touch with Smart Homes Real Estate for property inquiries
             </p>
           </div>
           
