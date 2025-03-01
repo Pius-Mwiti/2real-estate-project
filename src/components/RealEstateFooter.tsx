@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Mail, MapPin, Phone, Twitter } from "lucide-react";
 
@@ -11,7 +12,7 @@ const RealEstateFooter = () => {
           <div>
             <Link to="/" className="inline-block mb-4">
               <div className="flex items-center gap-2 font-display text-xl font-bold">
-                <span className="text-primary">Wangila</span>
+                <span className="text-primary">Smart Homes</span>
                 <span>Real Estate</span>
               </div>
             </Link>
@@ -170,7 +171,7 @@ const RealEstateFooter = () => {
       <div className="border-t border-muted py-6">
         <div className="container flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            © {currentYear} Wangila Real Estate. All rights reserved.
+            © {currentYear} Smart Homes Real Estate. All rights reserved.
           </p>
           <div className="flex items-center gap-4 text-sm text-muted-foreground">
             <a href="#" className="hover:text-primary transition-colors">

@@ -48,7 +48,7 @@ const Index = () => {
         <section className="bg-muted/30 border-b">
           <div className="container mx-auto px-4 py-16 md:py-24 flex flex-col md:flex-row md:items-center gap-8">
             <div className="md:w-1/2 space-y-6">
-              <Badge variant="outline" className="mb-4 animate-fade-in">Welcome to Wangila Real Estate</Badge>
+              <Badge variant="outline" className="mb-4 animate-fade-in">Welcome to Smart Homes Real Estate</Badge>
               <h1 className="text-4xl md:text-5xl font-bold tracking-tight animate-fade-in [animation-delay:200ms]">
                 Find Your Perfect Rental Property in Kenya
               </h1>
@@ -145,7 +145,7 @@ const Index = () => {
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <Badge variant="outline" className="mb-3">Why Choose Us</Badge>
-              <h2 className="text-3xl font-bold mb-4">The Wangila Real Estate Advantage</h2>
+              <h2 className="text-3xl font-bold mb-4">The Smart Homes Real Estate Advantage</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
                 We strive to provide exceptional service and value to all our clients
               </p>
@@ -233,7 +233,7 @@ const Index = () => {
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl font-bold mb-4">Ready to Find Your Dream Home?</h2>
             <p className="max-w-2xl mx-auto mb-8 text-primary-foreground/90">
-              Contact Ezekiel Wangila today to schedule a viewing or discuss your specific requirements
+              Contact us today to schedule a viewing or discuss your specific requirements
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Button asChild size="lg" variant="secondary">

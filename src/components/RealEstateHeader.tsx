@@ -13,7 +13,7 @@ const RealEstateHeader = () => {
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-2">
           <Link to="/" className="flex items-center gap-2 font-display text-xl font-bold">
-            <span className="text-primary">Wangila</span>
+            <span className="text-primary">Smart Homes</span>
             <span>Real Estate</span>
           </Link>
         </div>
@@ -97,7 +97,7 @@ const RealEstateHeader = () => {
             <SheetContent side="right">
               <div className="px-2 py-6">
                 <Link to="/" className="flex items-center gap-2 font-display text-xl font-bold mb-6">
-                  <span className="text-primary">Wangila</span>
+                  <span className="text-primary">Smart Homes</span>
                   <span>Real Estate</span>
                 </Link>
                 <nav className="flex flex-col gap-4">
