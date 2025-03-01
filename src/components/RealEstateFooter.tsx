@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Mail, MapPin, Phone, Twitter } from "lucide-react";
 
@@ -157,10 +156,10 @@ const RealEstateFooter = () => {
               <li className="flex items-center gap-3">
                 <Mail className="h-5 w-5 text-primary shrink-0" />
                 <a
-                  href="mailto:info@wangilarealestate.com"
+                  href="mailto:piusmwiti254@gmail.com"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
-                  info@wangilarealestate.com
+                  piusmwiti254@gmail.com
                 </a>
               </li>
             </ul>
