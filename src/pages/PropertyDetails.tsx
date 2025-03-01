@@ -1,4 +1,5 @@
-import { useParams } from "react-router-dom";
+
+import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { properties } from "@/data/properties";
 import { Property } from "@/types/property";
@@ -10,7 +11,6 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import PropertyCard from "@/components/PropertyCard";
 import { Phone, User, Mail } from "lucide-react";
-import { Link } from "react-router-dom";
 
 const PropertyDetails = () => {
   const { id } = useParams<{ id: string }>();
