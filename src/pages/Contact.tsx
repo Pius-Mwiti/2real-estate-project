@@ -1,7 +1,7 @@
 
 import React from 'react';
-import { RealEstateHeader } from '@/components/RealEstateHeader';
-import { RealEstateFooter } from '@/components/RealEstateFooter';
+import RealEstateHeader from '@/components/RealEstateHeader';
+import RealEstateFooter from '@/components/RealEstateFooter';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';

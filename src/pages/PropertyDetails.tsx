@@ -1,15 +1,16 @@
-
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { properties } from "@/data/properties";
-import { RealEstateHeader } from "@/components/RealEstateHeader";
-import { RealEstateFooter } from "@/components/RealEstateFooter";
+import { Property } from "@/types/property";
+import RealEstateHeader from "@/components/RealEstateHeader";
+import RealEstateFooter from "@/components/RealEstateFooter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { PropertyCard } from "@/components/PropertyCard";
+import PropertyCard from "@/components/PropertyCard";
 import { Phone, User, Mail } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const PropertyDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -72,7 +73,9 @@ const PropertyDetails = () => {
           <div className="flex justify-center items-center h-[70vh] flex-col">
             <h2 className="text-2xl font-bold mb-4">Property Not Found</h2>
             <p className="text-muted-foreground mb-6">Sorry, we couldn't find the property you're looking for.</p>
-            <Button href="/properties">Browse All Properties</Button>
+            <Button asChild>
+              <Link to="/properties">Browse All Properties</Link>
+            </Button>
           </div>
         </main>
         <RealEstateFooter />

@@ -1,5 +1,4 @@
-
-import { Property } from "@/types/property";
+import { Property, PropertyType } from "@/types/property";
 
 export const properties: Property[] = [
   {
@@ -111,7 +110,7 @@ export const properties: Property[] = [
     features: ["Balcony", "Security", "Parking", "Swimming Pool", "Gym"],
     images: [
       "https://images.unsplash.com/photo-1565183997392-2f6f122e5912?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1560185127-6ed189bf02f4?auto=format&fit=crop&w=800&q=80"
+      "https://images.unsplash.com/photo-1560185007-cde436f6a4d0?auto=format&fit=crop&w=800&q=80"
     ],
     isFeatured: true,
     isAvailable: true,
@@ -119,7 +118,6 @@ export const properties: Property[] = [
   }
 ];
 
-// Generate 20 more properties for demo purposes
 const generateMoreProperties = (): Property[] => {
   const locations = ["Nairobi, Parklands", "Nairobi, Roysambu", "Nairobi, Karen", "Nairobi, Langata", "Nairobi, Embakasi"];
   const types: PropertyType[] = ["House", "Apartment", "Single Room", "Bedsitter", "2 Bedroom", "3 Bedroom", "Studio"];
@@ -154,7 +152,6 @@ const generateMoreProperties = (): Property[] => {
     
     const randomFeatures = [...features].sort(() => 0.5 - Math.random()).slice(0, Math.floor(Math.random() * 5) + 3);
     
-    // Select 2-4 random images
     const numImages = Math.floor(Math.random() * 3) + 2;
     const propertyImages = [...randomImages].sort(() => 0.5 - Math.random()).slice(0, numImages);
     
@@ -184,17 +181,14 @@ const generateMoreProperties = (): Property[] => {
 
 export const allProperties = [...properties, ...generateMoreProperties()];
 
-// Function to get properties by type
 export const getPropertiesByType = (type: PropertyType): Property[] => {
   return allProperties.filter(property => property.type === type);
 };
 
-// Function to get featured properties
 export const getFeaturedProperties = (): Property[] => {
   return allProperties.filter(property => property.isFeatured);
 };
 
-// Function to get property by ID
 export const getPropertyById = (id: string): Property | undefined => {
   return allProperties.find(property => property.id === id);
 };
