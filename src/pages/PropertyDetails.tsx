@@ -1,53 +1,43 @@
 
-import { useEffect, useState } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
-import { Bath, Bed, Home, MapPin, Ruler } from "lucide-react";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { properties } from "@/data/properties";
+import { RealEstateHeader } from "@/components/RealEstateHeader";
+import { RealEstateFooter } from "@/components/RealEstateFooter";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import { Property } from "@/types/property";
-import { getPropertyById } from "@/data/properties";
-import RealEstateHeader from "@/components/RealEstateHeader";
-import RealEstateFooter from "@/components/RealEstateFooter";
-import PropertyCard from "@/components/PropertyCard";
+import { Separator } from "@/components/ui/separator";
+import { PropertyCard } from "@/components/PropertyCard";
+import { Phone, User, Mail } from "lucide-react";
 
 const PropertyDetails = () => {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
-  const [property, setProperty] = useState<Property | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [similarProperties, setSimilarProperties] = useState<Property[]>([]);
   
-  useEffect(() => {
-    if (!id) return;
-    
-    // Simulate loading
-    setIsLoading(true);
-    window.scrollTo(0, 0);
-    
-    setTimeout(() => {
-      const foundProperty = getPropertyById(id);
+  const { data: property, isLoading, error } = useQuery({
+    queryKey: ["property", id],
+    queryFn: () => {
+      const foundProperty = properties.find(p => p.id === id);
+      if (!foundProperty) throw new Error("Property not found");
+      return foundProperty;
+    }
+  });
+  
+  const { data: similarProperties } = useQuery({
+    queryKey: ["similarProperties", property?.type, property?.id],
+    queryFn: () => {
+      if (!property) return [];
       
-      if (foundProperty) {
-        setProperty(foundProperty);
-        
-        // Get similar properties (same type, different ID)
-        const similar = getPropertyById("all")
-          ?.filter(p => p.type === foundProperty.type && p.id !== foundProperty.id)
-          .slice(0, 3) || [];
-        
-        setSimilarProperties(similar);
-      }
-      
-      setIsLoading(false);
-    }, 500);
-  }, [id]);
+      return properties
+        .filter(p => 
+          p.id !== property.id && 
+          p.type === property.type && 
+          p.isAvailable
+        )
+        .slice(0, 3);
+    },
+    enabled: !!property
+  });
   
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat("en-KE", {
@@ -61,23 +51,11 @@ const PropertyDetails = () => {
     return (
       <div className="min-h-screen flex flex-col">
         <RealEstateHeader />
-        <main className="flex-1 container mx-auto px-4 py-8">
-          <div className="animate-pulse">
-            <div className="h-8 bg-muted rounded w-1/4 mb-4"></div>
-            <div className="aspect-[16/9] bg-muted rounded-lg mb-8"></div>
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="md:col-span-2 space-y-4">
-                <div className="h-8 bg-muted rounded w-3/4"></div>
-                <div className="h-4 bg-muted rounded w-1/2"></div>
-                <div className="space-y-2">
-                  <div className="h-4 bg-muted rounded"></div>
-                  <div className="h-4 bg-muted rounded"></div>
-                  <div className="h-4 bg-muted rounded w-3/4"></div>
-                </div>
-              </div>
-              <div className="md:col-span-1">
-                <div className="h-48 bg-muted rounded"></div>
-              </div>
+        <main className="flex-1 container mx-auto px-4 py-12">
+          <div className="flex justify-center items-center h-[70vh]">
+            <div className="animate-pulse flex flex-col items-center">
+              <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+              <div className="mt-4 text-lg font-medium">Loading property details...</div>
             </div>
           </div>
         </main>
@@ -86,20 +64,15 @@ const PropertyDetails = () => {
     );
   }
   
-  if (!property) {
+  if (error || !property) {
     return (
       <div className="min-h-screen flex flex-col">
         <RealEstateHeader />
-        <main className="flex-1 container mx-auto px-4 py-16 text-center">
-          <div className="max-w-md mx-auto">
-            <Home className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
-            <h1 className="text-2xl font-bold mb-2">Property Not Found</h1>
-            <p className="text-muted-foreground mb-6">
-              The property you're looking for may have been removed or is no longer available.
-            </p>
-            <Button asChild>
-              <Link to="/properties">Browse Properties</Link>
-            </Button>
+        <main className="flex-1 container mx-auto px-4 py-12">
+          <div className="flex justify-center items-center h-[70vh] flex-col">
+            <h2 className="text-2xl font-bold mb-4">Property Not Found</h2>
+            <p className="text-muted-foreground mb-6">Sorry, we couldn't find the property you're looking for.</p>
+            <Button href="/properties">Browse All Properties</Button>
           </div>
         </main>
         <RealEstateFooter />
@@ -111,198 +84,261 @@ const PropertyDetails = () => {
     <div className="min-h-screen flex flex-col">
       <RealEstateHeader />
       
-      <main className="flex-1">
-        <div className="container mx-auto px-4 py-8">
-          <div className="flex items-center gap-2 mb-6 text-sm">
-            <Link to="/" className="text-muted-foreground hover:text-foreground">
-              Home
-            </Link>
-            <span className="text-muted-foreground">/</span>
-            <Link to="/properties" className="text-muted-foreground hover:text-foreground">
-              Properties
-            </Link>
-            <span className="text-muted-foreground">/</span>
-            <span className="font-medium truncate">{property.title}</span>
+      <main className="flex-1 container mx-auto px-4 py-12">
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-4 flex flex-wrap justify-between items-center">
+            <h1 className="text-3xl font-bold">{property.title}</h1>
+            <Badge className="text-lg px-4 py-1">{formatPrice(property.price)}/month</Badge>
           </div>
           
-          {property.images.length > 0 && (
-            <div className="mb-8">
-              <Carousel className="w-full">
-                <CarouselContent>
-                  {property.images.map((image, index) => (
-                    <CarouselItem key={index}>
-                      <div className="aspect-[16/9] relative overflow-hidden rounded-lg">
-                        <img
-                          src={image}
-                          alt={`${property.title} - Image ${index + 1}`}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                <CarouselPrevious className="left-4" />
-                <CarouselNext className="right-4" />
-              </Carousel>
-              
-              <div className="flex gap-2 mt-4 overflow-x-auto pb-2">
-                {property.images.map((image, index) => (
-                  <div
-                    key={index}
-                    className="flex-shrink-0 w-20 h-20 rounded-md overflow-hidden border cursor-pointer hover:opacity-80 transition-opacity"
-                  >
-                    <img
-                      src={image}
-                      alt={`Thumbnail ${index + 1}`}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+          <p className="text-muted-foreground mb-6">{property.location}</p>
           
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="md:col-span-2">
-              <div className="flex items-center justify-between mb-4">
-                <h1 className="text-2xl md:text-3xl font-bold">{property.title}</h1>
-                <Badge variant={property.isAvailable ? "secondary" : "destructive"}>
-                  {property.isAvailable ? "Available" : "Rented"}
-                </Badge>
-              </div>
-              
-              <div className="flex items-center text-muted-foreground gap-1 mb-4">
-                <MapPin className="h-4 w-4" />
-                <span>{property.location}</span>
-              </div>
-              
-              <div className="flex items-center gap-6 mb-6">
-                <div className="flex items-center gap-1.5">
-                  <Bed className="h-5 w-5 text-muted-foreground" />
-                  <span>
-                    {property.bedrooms} {property.bedrooms === 1 ? 'Bedroom' : 'Bedrooms'}
-                  </span>
-                </div>
-                
-                <div className="flex items-center gap-1.5">
-                  <Bath className="h-5 w-5 text-muted-foreground" />
-                  <span>
-                    {property.bathrooms} {property.bathrooms === 1 ? 'Bathroom' : 'Bathrooms'}
-                  </span>
-                </div>
-                
-                <div className="flex items-center gap-1.5">
-                  <Ruler className="h-5 w-5 text-muted-foreground" />
-                  <span>{property.area} sq ft</span>
-                </div>
-              </div>
-              
-              <div className="mb-6">
-                <h2 className="text-xl font-semibold mb-2">Description</h2>
-                <p className="text-muted-foreground">{property.description}</p>
-              </div>
-              
-              <div className="mb-6">
-                <h2 className="text-xl font-semibold mb-2">Features</h2>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                  {property.features.map((feature, index) => (
-                    <div key={index} className="flex items-center gap-2">
-                      <div className="h-2 w-2 rounded-full bg-primary"></div>
-                      <span>{feature}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+            <div className="lg:col-span-2 rounded-lg overflow-hidden">
+              <img 
+                src={property.images[0]} 
+                alt={property.title}
+                className="w-full h-[500px] object-cover"
+              />
             </div>
             
-            <div className="md:col-span-1">
-              <div className="bg-card border rounded-lg p-6 sticky top-24">
-                <div className="text-2xl font-bold text-primary mb-4">
-                  {formatPrice(property.price)}<span className="text-sm font-normal text-muted-foreground">/month</span>
+            <div className="grid grid-cols-2 gap-4">
+              {property.images.slice(1, 5).map((image, index) => (
+                <div key={index} className="rounded-lg overflow-hidden">
+                  <img
+                    src={image}
+                    alt={`${property.title} ${index + 2}`}
+                    className="w-full h-[242px] object-cover"
+                  />
                 </div>
-                
-                <div className="space-y-4">
-                  <Button asChild className="w-full">
-                    <Link to="/contact">Contact Agent</Link>
-                  </Button>
-                  
-                  <Button variant="outline" className="w-full">
-                    <Phone className="mr-2 h-4 w-4" />
-                    Call Agent
-                  </Button>
-                </div>
-                
-                <div className="mt-6 pt-6 border-t">
-                  <h3 className="font-semibold mb-2">Property Details</h3>
-                  <ul className="space-y-2 text-sm">
-                    <li className="flex justify-between">
-                      <span className="text-muted-foreground">Property Type:</span>
-                      <span className="font-medium">{property.type}</span>
-                    </li>
-                    <li className="flex justify-between">
-                      <span className="text-muted-foreground">Bedrooms:</span>
-                      <span className="font-medium">{property.bedrooms}</span>
-                    </li>
-                    <li className="flex justify-between">
-                      <span className="text-muted-foreground">Bathrooms:</span>
-                      <span className="font-medium">{property.bathrooms}</span>
-                    </li>
-                    <li className="flex justify-between">
-                      <span className="text-muted-foreground">Area:</span>
-                      <span className="font-medium">{property.area} sq ft</span>
-                    </li>
-                    <li className="flex justify-between">
-                      <span className="text-muted-foreground">Available:</span>
-                      <span className="font-medium">{property.isAvailable ? "Yes" : "No"}</span>
-                    </li>
-                    <li className="flex justify-between">
-                      <span className="text-muted-foreground">Listed:</span>
-                      <span className="font-medium">{property.createdAt}</span>
-                    </li>
-                  </ul>
-                </div>
-                
-                <div className="mt-6 pt-6 border-t">
-                  <h3 className="font-semibold mb-2">Agent Information</h3>
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
-                      <User className="h-5 w-5 text-primary" />
-                    </div>
-                    <div>
-                      <p className="font-medium">Ezekiel Wangila</p>
-                      <p className="text-sm text-muted-foreground">Real Estate Agent</p>
-                    </div>
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    <div className="flex items-center gap-2 mb-1">
-                      <Phone className="h-3.5 w-3.5" />
-                      <a href="tel:+254708333761" className="hover:text-primary">
-                        +254 708 333 761
-                      </a>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Mail className="h-3.5 w-3.5" />
-                      <a href="mailto:info@wangilarealestate.com" className="hover:text-primary">
-                        info@wangilarealestate.com
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
           
-          {similarProperties.length > 0 && (
-            <div className="mt-12">
-              <h2 className="text-2xl font-bold mb-6">Similar Properties</h2>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {similarProperties.map(prop => (
-                  <PropertyCard key={prop.id} property={prop} />
-                ))}
-              </div>
+          <div className="grid lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2">
+              <Card>
+                <CardContent className="p-6">
+                  <div className="flex flex-wrap gap-6 mb-6">
+                    <div className="flex items-center gap-2">
+                      <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        width="24" 
+                        height="24" 
+                        viewBox="0 0 24 24" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        strokeWidth="2" 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        className="text-primary"
+                      >
+                        <path d="M19 4h-1a1 1 0 0 0-1 1v1H7V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h10v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1Z" />
+                        <path d="M7 9h10" />
+                        <path d="M7 14h10" />
+                      </svg>
+                      <span>{property.bedrooms} Bedrooms</span>
+                    </div>
+                    
+                    <div className="flex items-center gap-2">
+                      <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        width="24" 
+                        height="24" 
+                        viewBox="0 0 24 24" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        strokeWidth="2" 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        className="text-primary"
+                      >
+                        <path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5" />
+                        <line x1="10" x2="8" y1="5" y2="7" />
+                        <line x1="2" x2="22" y1="12" y2="12" />
+                        <line x1="7" x2="7" y1="19" y2="21" />
+                        <line x1="17" x2="17" y1="19" y2="21" />
+                      </svg>
+                      <span>{property.bathrooms} Bathrooms</span>
+                    </div>
+                    
+                    <div className="flex items-center gap-2">
+                      <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        width="24" 
+                        height="24" 
+                        viewBox="0 0 24 24" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        strokeWidth="2" 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        className="text-primary"
+                      >
+                        <rect width="18" height="18" x="3" y="3" rx="2" />
+                        <path d="M3 9h18" />
+                        <path d="M9 21V9" />
+                      </svg>
+                      <span>{property.area} sq ft</span>
+                    </div>
+                    
+                    <div className="flex items-center gap-2">
+                      <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        width="24" 
+                        height="24" 
+                        viewBox="0 0 24 24" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        strokeWidth="2" 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        className="text-primary"
+                      >
+                        <path d="M20.2 7.8l-7.7 7.7-4-4-5.7 5.7" />
+                        <path d="M15 7h6v6" />
+                      </svg>
+                      <span>{property.type}</span>
+                    </div>
+                  </div>
+                  
+                  <h2 className="text-xl font-semibold mb-3">Description</h2>
+                  <p className="text-muted-foreground mb-6">{property.description}</p>
+                  
+                  <h2 className="text-xl font-semibold mb-3">Features & Amenities</h2>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-y-2 mb-6">
+                    {property.features.map((feature, index) => (
+                      <div key={index} className="flex items-center gap-2">
+                        <svg 
+                          xmlns="http://www.w3.org/2000/svg" 
+                          width="16" 
+                          height="16" 
+                          viewBox="0 0 24 24" 
+                          fill="none" 
+                          stroke="currentColor" 
+                          strokeWidth="2" 
+                          strokeLinecap="round" 
+                          strokeLinejoin="round" 
+                          className="text-primary"
+                        >
+                          <polyline points="9 11 12 14 22 4" />
+                          <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                        </svg>
+                        <span>{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+              
+              {similarProperties && similarProperties.length > 0 && (
+                <div className="mt-8">
+                  <h2 className="text-2xl font-semibold mb-6">Similar Properties</h2>
+                  <div className="grid md:grid-cols-3 gap-6">
+                    {similarProperties.map((prop) => (
+                      <PropertyCard key={prop.id} property={prop} />
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
-          )}
+            
+            <div>
+              <Card className="sticky top-24">
+                <CardContent className="p-6">
+                  <h2 className="text-xl font-semibold mb-4">Contact Property Agent</h2>
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-16 h-16 rounded-full overflow-hidden bg-gray-200 flex items-center justify-center">
+                      <User className="h-8 w-8 text-gray-500" />
+                    </div>
+                    <div>
+                      <h3 className="font-medium">Ezekiel Wangila</h3>
+                      <p className="text-muted-foreground text-sm">Property Manager</p>
+                    </div>
+                  </div>
+                  
+                  <Separator className="mb-6" />
+                  
+                  <div className="space-y-4 mb-6">
+                    <div className="flex items-center gap-3">
+                      <Phone className="h-5 w-5 text-primary" />
+                      <div>
+                        <p className="text-sm text-muted-foreground">Phone</p>
+                        <a href="tel:+254708333761" className="font-medium hover:text-primary">
+                          +254 708 333 761
+                        </a>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center gap-3">
+                      <Mail className="h-5 w-5 text-primary" />
+                      <div>
+                        <p className="text-sm text-muted-foreground">Email</p>
+                        <a href="mailto:ezekiel.wangila@example.com" className="font-medium hover:text-primary">
+                          ezekiel.wangila@example.com
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <Separator className="mb-6" />
+                  
+                  <form className="space-y-4">
+                    <div>
+                      <label htmlFor="name" className="block text-sm font-medium mb-1">
+                        Your Name
+                      </label>
+                      <input
+                        id="name"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                        placeholder="Enter your name"
+                      />
+                    </div>
+                    
+                    <div>
+                      <label htmlFor="email" className="block text-sm font-medium mb-1">
+                        Your Email
+                      </label>
+                      <input
+                        id="email"
+                        type="email"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                        placeholder="Enter your email"
+                      />
+                    </div>
+                    
+                    <div>
+                      <label htmlFor="phone" className="block text-sm font-medium mb-1">
+                        Your Phone
+                      </label>
+                      <input
+                        id="phone"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                        placeholder="Enter your phone number"
+                      />
+                    </div>
+                    
+                    <div>
+                      <label htmlFor="message" className="block text-sm font-medium mb-1">
+                        Message
+                      </label>
+                      <textarea
+                        id="message"
+                        rows={4}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
+                        placeholder="I'm interested in this property"
+                        defaultValue={`Hi Ezekiel, I'm interested in the ${property.title} listed for ${formatPrice(property.price)}/month. Please contact me with more information.`}
+                      ></textarea>
+                    </div>
+                    
+                    <Button className="w-full" size="lg">
+                      Send Message
+                    </Button>
+                  </form>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
         </div>
       </main>
       
