@@ -20,7 +20,7 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
     }).format(price);
   };
   
-  const handleContactAgent = (e: React.MouseEvent) => {
+  const handleContactAgent = (e: React.MouseEvent | React.FormEvent) => {
     e.preventDefault();
     e.stopPropagation();
     

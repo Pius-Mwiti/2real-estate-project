@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -29,6 +30,14 @@ const propertyCategories = [
     description: "Cozy combined bedroom and sitting room spaces",
   },
 ];
+
+const formatPrice = (price: number) => {
+  return new Intl.NumberFormat("en-KE", {
+    style: "currency",
+    currency: "KES",
+    maximumFractionDigits: 0,
+  }).format(price);
+};
 
 const Index = () => {
   const [featuredProperties, setFeaturedProperties] = useState<Property[]>([]);
@@ -67,14 +76,14 @@ const Index = () => {
             <div className="md:w-1/2 animate-fade-in [animation-delay:800ms]">
               <div className="relative rounded-lg overflow-hidden shadow-xl">
                 <img 
-                  src="/lovable-uploads/ad79d4b7-cce1-47cd-8afe-6d128e15be3a.png" 
+                  src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=1200&q=80" 
                   alt="Modern apartment building" 
                   className="w-full h-auto object-cover aspect-[4/3]"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
                   <Badge className="bg-primary mb-2">Featured</Badge>
                   <h3 className="text-xl font-bold text-white mb-2">Modern Apartment Living</h3>
-                  <p className="text-white/80 text-sm">Starting at KES 15,000/month</p>
+                  <p className="text-white/80 text-sm">{formatPrice(15000)}/month</p>
                 </div>
               </div>
             </div>
@@ -131,11 +140,16 @@ const Index = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <div className="bg-card rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
-                <img 
-                  src="/lovable-uploads/ad79d4b7-cce1-47cd-8afe-6d128e15be3a.png" 
-                  alt="Two Bedroom Apartment" 
-                  className="w-full h-48 object-cover"
-                />
+                <div className="relative">
+                  <img 
+                    src="/lovable-uploads/3d311218-a48e-42f6-89b1-2a196f883af6.png" 
+                    alt="Two Bedroom Apartment" 
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="absolute top-0 right-0 bg-primary text-white px-3 py-1 rounded-bl-lg font-semibold">
+                    {formatPrice(25000)}/month
+                  </div>
+                </div>
                 <div className="p-4">
                   <h3 className="text-lg font-semibold mb-2">Two Bedroom Apartments</h3>
                   <p className="text-muted-foreground text-sm mb-3">Spacious living for small families and professionals</p>
@@ -146,11 +160,16 @@ const Index = () => {
               </div>
               
               <div className="bg-card rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
-                <img 
-                  src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80" 
-                  alt="One Bedroom Apartment" 
-                  className="w-full h-48 object-cover"
-                />
+                <div className="relative">
+                  <img 
+                    src="/lovable-uploads/d940c907-a13d-4729-ab95-ca18f5d9ab73.png" 
+                    alt="One Bedroom Apartment" 
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="absolute top-0 right-0 bg-primary text-white px-3 py-1 rounded-bl-lg font-semibold">
+                    {formatPrice(18000)}/month
+                  </div>
+                </div>
                 <div className="p-4">
                   <h3 className="text-lg font-semibold mb-2">One Bedroom Apartments</h3>
                   <p className="text-muted-foreground text-sm mb-3">Perfect for individuals or couples</p>
@@ -161,11 +180,16 @@ const Index = () => {
               </div>
               
               <div className="bg-card rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
-                <img 
-                  src="https://images.unsplash.com/photo-1721322800607-8c38375eef04?auto=format&fit=crop&w=1200&q=80" 
-                  alt="Bedsitter" 
-                  className="w-full h-48 object-cover"
-                />
+                <div className="relative">
+                  <img 
+                    src="/lovable-uploads/fb5ff5dd-7611-488f-a672-f144d3bb7133.png" 
+                    alt="Bedsitter" 
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="absolute top-0 right-0 bg-primary text-white px-3 py-1 rounded-bl-lg font-semibold">
+                    {formatPrice(9000)}/month
+                  </div>
+                </div>
                 <div className="p-4">
                   <h3 className="text-lg font-semibold mb-2">Studio & Bedsitters</h3>
                   <p className="text-muted-foreground text-sm mb-3">Affordable and functional spaces for singles</p>
