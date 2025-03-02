@@ -33,9 +33,9 @@ export const properties: Property[] = [
     area: 450,
     features: ["Furnished", "Wi-Fi", "Security", "Elevator", "Gym"],
     images: [
-      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1630699144867-37acec97df5a?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=800&q=80"
+      "/lovable-uploads/3d311218-a48e-42f6-89b1-2a196f883af6.png",
+      "/lovable-uploads/d940c907-a13d-4729-ab95-ca18f5d9ab73.png",
+      "/lovable-uploads/5c38c7c8-192a-44cf-ac0a-12391a70bc8d.png"
     ],
     isFeatured: false,
     isAvailable: true,
@@ -53,9 +53,9 @@ export const properties: Property[] = [
     area: 950,
     features: ["Balcony", "Security", "Parking", "Water Tank"],
     images: [
-      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?auto=format&fit=crop&w=800&q=80"
+      "/lovable-uploads/f81492a5-ccbb-4265-9418-4b2d85c015de.png",
+      "/lovable-uploads/bf4f28ac-adee-4ca5-b35d-becc8d61be68.png",
+      "/lovable-uploads/ae421ae3-f680-48e1-b682-f644d3e63188.png"
     ],
     isFeatured: true,
     isAvailable: true,
@@ -73,9 +73,9 @@ export const properties: Property[] = [
     area: 350,
     features: ["Furnished", "Security", "Communal Water"],
     images: [
-      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?auto=format&fit=crop&w=800&q=80"
+      "/lovable-uploads/fb5ff5dd-7611-488f-a672-f144d3bb7133.png",
+      "/lovable-uploads/f150e2e0-9fc3-468f-b60a-d1928e089946.png",
+      "/lovable-uploads/6261cce4-353d-44c7-8e49-0c5c090066b9.png"
     ],
     isFeatured: false,
     isAvailable: true,
@@ -93,9 +93,9 @@ export const properties: Property[] = [
     area: 200,
     features: ["Furnished", "Shared Kitchen", "Shared Bathroom", "Wi-Fi"],
     images: [
-      "https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1564078516393-cf04bd966897?auto=format&fit=crop&w=800&q=80"
+      "/lovable-uploads/36873cc5-3c00-4bf7-b302-38d4742f16dd.png",
+      "/lovable-uploads/c68bc514-46be-4eee-9e9d-5b92eaefc2e4.png",
+      "/lovable-uploads/597b4f5b-bfa9-4422-96f7-96c462195e8f.png"
     ],
     isFeatured: false,
     isAvailable: true,
@@ -113,7 +113,7 @@ export const properties: Property[] = [
     area: 1500,
     features: ["Balcony", "Security", "Parking", "Swimming Pool", "Gym"],
     images: [
-      "https://images.unsplash.com/photo-1565183997392-2f6f122e5912?auto=format&fit=crop&w=800&q=80",
+      "/lovable-uploads/6311e047-b4db-41a3-9d00-28389144a1d7.png",
       "https://images.unsplash.com/photo-1560185007-cde436f6a4d0?auto=format&fit=crop&w=800&q=80",
       "https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e?auto=format&fit=crop&w=800&q=80"
     ],
@@ -263,6 +263,109 @@ export const properties: Property[] = [
   }
 ];
 
+const newApartmentProperties: Property[] = [
+  {
+    id: "14",
+    title: "Modern One Bedroom Unit",
+    description: "This cozy one-bedroom apartment features a modern kitchen setup and bright living space. Perfect for singles or couples looking for affordable housing in a convenient location.",
+    price: 15000,
+    location: "Nairobi, Eastlands",
+    type: "Apartment",
+    bedrooms: 1,
+    bathrooms: 1,
+    area: 550,
+    features: ["Modern Kitchen", "Bright Interior", "Security", "Water Supply"],
+    images: [
+      "/lovable-uploads/d940c907-a13d-4729-ab95-ca18f5d9ab73.png",
+      "/lovable-uploads/3d311218-a48e-42f6-89b1-2a196f883af6.png",
+      "/lovable-uploads/5c38c7c8-192a-44cf-ac0a-12391a70bc8d.png"
+    ],
+    isFeatured: true,
+    isAvailable: true,
+    createdAt: "2023-09-15"
+  },
+  {
+    id: "15",
+    title: "Bright Studio with Large Windows",
+    description: "A spacious studio apartment with wooden flooring and large windows allowing plenty of natural light. Features a compact kitchen area and modern finishes.",
+    price: 12500,
+    location: "Nairobi, Ngara",
+    type: "Studio",
+    bedrooms: 0,
+    bathrooms: 1,
+    area: 400,
+    features: ["Wooden Floors", "Natural Light", "Modern Finishes"],
+    images: [
+      "/lovable-uploads/f81492a5-ccbb-4265-9418-4b2d85c015de.png",
+      "/lovable-uploads/bf4f28ac-adee-4ca5-b35d-becc8d61be68.png",
+      "/lovable-uploads/ae421ae3-f680-48e1-b682-f644d3e63188.png"
+    ],
+    isFeatured: false,
+    isAvailable: true,
+    createdAt: "2023-10-05"
+  },
+  {
+    id: "16",
+    title: "Affordable Bedsitter Unit",
+    description: "Compact and affordable bedsitter with basic amenities. Includes a kitchenette and private bathroom. Ideal for students or young professionals.",
+    price: 8000,
+    location: "Nairobi, Ruaka",
+    type: "Bedsitter",
+    bedrooms: 1,
+    bathrooms: 1,
+    area: 300,
+    features: ["Kitchenette", "Private Bathroom", "Security"],
+    images: [
+      "/lovable-uploads/fb5ff5dd-7611-488f-a672-f144d3bb7133.png",
+      "/lovable-uploads/f150e2e0-9fc3-468f-b60a-d1928e089946.png",
+      "/lovable-uploads/6261cce4-353d-44c7-8e49-0c5c090066b9.png"
+    ],
+    isFeatured: true,
+    isAvailable: true,
+    createdAt: "2023-08-20"
+  },
+  {
+    id: "17",
+    title: "Premium Apartment Complex",
+    description: "Luxury apartment in a modern high-rise building with premium amenities including a fitness center, rooftop lounge, and 24-hour security.",
+    price: 35000,
+    location: "Nairobi, Westlands",
+    type: "Apartment",
+    bedrooms: 2,
+    bathrooms: 2,
+    area: 1200,
+    features: ["Fitness Center", "Rooftop Lounge", "24-Hour Security", "Parking"],
+    images: [
+      "/lovable-uploads/c68bc514-46be-4eee-9e9d-5b92eaefc2e4.png",
+      "/lovable-uploads/6311e047-b4db-41a3-9d00-28389144a1d7.png",
+      "/lovable-uploads/36873cc5-3c00-4bf7-b302-38d4742f16dd.png"
+    ],
+    isFeatured: true,
+    isAvailable: true,
+    createdAt: "2023-07-10"
+  },
+  {
+    id: "18",
+    title: "Contemporary Apartment Building",
+    description: "Modern apartment complex with stylish exterior design and landscaped grounds. Units feature contemporary finishes and open floor plans.",
+    price: 28000,
+    location: "Nairobi, Kilimani",
+    type: "Apartment",
+    bedrooms: 2,
+    bathrooms: 2,
+    area: 1000,
+    features: ["Contemporary Design", "Open Floor Plan", "Landscaped Grounds", "Secure Parking"],
+    images: [
+      "/lovable-uploads/597b4f5b-bfa9-4422-96f7-96c462195e8f.png",
+      "/lovable-uploads/c68bc514-46be-4eee-9e9d-5b92eaefc2e4.png",
+      "/lovable-uploads/6311e047-b4db-41a3-9d00-28389144a1d7.png"
+    ],
+    isFeatured: false,
+    isAvailable: true,
+    createdAt: "2023-11-15"
+  }
+];
+
 const generateMoreProperties = (): Property[] => {
   const locations = ["Nairobi, Parklands", "Nairobi, Roysambu", "Nairobi, Karen", "Nairobi, Langata", "Nairobi, Embakasi"];
   const types: PropertyType[] = ["House", "Apartment", "Single Room", "Bedsitter", "2 Bedroom", "3 Bedroom", "Studio"];
@@ -287,7 +390,7 @@ const generateMoreProperties = (): Property[] => {
   
   const additionalProperties: Property[] = [];
   
-  for (let i = 7; i <= 26; i++) {
+  for (let i = 27; i <= 36; i++) {
     const type = types[Math.floor(Math.random() * types.length)];
     const bedrooms = type === "Studio" ? 0 : 
                     type === "Bedsitter" || type === "Single Room" ? 1 :
@@ -324,7 +427,7 @@ const generateMoreProperties = (): Property[] => {
   return additionalProperties;
 };
 
-export const allProperties = [...properties, ...generateMoreProperties()];
+export const allProperties = [...properties, ...newApartmentProperties, ...generateMoreProperties()];
 
 export const getPropertiesByType = (type: PropertyType): Property[] => {
   return allProperties.filter(property => property.type === type);
