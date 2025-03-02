@@ -76,7 +76,7 @@ const Index = () => {
             <div className="md:w-1/2 animate-fade-in [animation-delay:800ms]">
               <div className="relative rounded-lg overflow-hidden shadow-xl">
                 <img 
-                  src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=1200&q=80" 
+                  src="/lovable-uploads/c8a7f725-a66c-4d13-a58e-e17d8a0f7033.png" 
                   alt="Modern apartment building" 
                   className="w-full h-auto object-cover aspect-[4/3]"
                 />
