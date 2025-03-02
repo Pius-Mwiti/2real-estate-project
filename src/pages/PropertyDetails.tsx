@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import PropertyCard from "@/components/PropertyCard";
 import { Phone, User, Mail } from "lucide-react";
+import { toast } from "sonner";
 
 const PropertyDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -45,6 +46,19 @@ const PropertyDetails = () => {
       currency: "KES",
       maximumFractionDigits: 0,
     }).format(price);
+  };
+  
+  const handleContactAgent = (e: React.MouseEvent) => {
+    e.preventDefault();
+    
+    const subject = `Inquiry about ${property.title}`;
+    const body = `Hi Ezekiel,\n\nI am interested in the ${property.title} listed for ${formatPrice(property.price)}/month located at ${property.location}.\n\nPlease provide more information about this property.\n\nThank you!`;
+    
+    window.location.href = `mailto:piusmwiti254@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    
+    toast.success("Opening email client...", {
+      description: "Contact form is being prepared in your default email app."
+    });
   };
   
   if (isLoading) {
@@ -285,7 +299,10 @@ const PropertyDetails = () => {
                   
                   <Separator className="mb-6" />
                   
-                  <form className="space-y-4">
+                  <form className="space-y-4" onSubmit={(e) => {
+                    e.preventDefault();
+                    handleContactAgent(e);
+                  }}>
                     <div>
                       <label htmlFor="name" className="block text-sm font-medium mb-1">
                         Your Name
@@ -333,7 +350,7 @@ const PropertyDetails = () => {
                       ></textarea>
                     </div>
                     
-                    <Button className="w-full" size="lg">
+                    <Button type="submit" className="w-full" size="lg">
                       Send Message
                     </Button>
                   </form>

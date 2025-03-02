@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -68,13 +67,13 @@ const Index = () => {
             <div className="md:w-1/2 animate-fade-in [animation-delay:800ms]">
               <div className="relative rounded-lg overflow-hidden shadow-xl">
                 <img 
-                  src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80" 
-                  alt="Property showcase" 
+                  src="/lovable-uploads/ad79d4b7-cce1-47cd-8afe-6d128e15be3a.png" 
+                  alt="Modern apartment building" 
                   className="w-full h-auto object-cover aspect-[4/3]"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
                   <Badge className="bg-primary mb-2">Featured</Badge>
-                  <h3 className="text-xl font-bold text-white mb-2">Luxury Living Spaces</h3>
+                  <h3 className="text-xl font-bold text-white mb-2">Modern Apartment Living</h3>
                   <p className="text-white/80 text-sm">Starting at KES 15,000/month</p>
                 </div>
               </div>
@@ -115,6 +114,72 @@ const Index = () => {
                   </div>
                 </Link>
               ))}
+            </div>
+          </div>
+        </section>
+        
+        {/* Apartment Types */}
+        <section className="bg-muted/30 py-16">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <Badge variant="outline" className="mb-3">Apartment Types</Badge>
+              <h2 className="text-3xl font-bold mb-4">Browse Our Apartment Collection</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                From luxurious two-bedroom units to cozy studio spaces
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="bg-card rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+                <img 
+                  src="/lovable-uploads/ad79d4b7-cce1-47cd-8afe-6d128e15be3a.png" 
+                  alt="Two Bedroom Apartment" 
+                  className="w-full h-48 object-cover"
+                />
+                <div className="p-4">
+                  <h3 className="text-lg font-semibold mb-2">Two Bedroom Apartments</h3>
+                  <p className="text-muted-foreground text-sm mb-3">Spacious living for small families and professionals</p>
+                  <Button asChild variant="outline" size="sm" className="w-full">
+                    <Link to="/properties?type=Apartment&bedrooms=2">View Options</Link>
+                  </Button>
+                </div>
+              </div>
+              
+              <div className="bg-card rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+                <img 
+                  src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80" 
+                  alt="One Bedroom Apartment" 
+                  className="w-full h-48 object-cover"
+                />
+                <div className="p-4">
+                  <h3 className="text-lg font-semibold mb-2">One Bedroom Apartments</h3>
+                  <p className="text-muted-foreground text-sm mb-3">Perfect for individuals or couples</p>
+                  <Button asChild variant="outline" size="sm" className="w-full">
+                    <Link to="/properties?type=Apartment&bedrooms=1">View Options</Link>
+                  </Button>
+                </div>
+              </div>
+              
+              <div className="bg-card rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+                <img 
+                  src="https://images.unsplash.com/photo-1721322800607-8c38375eef04?auto=format&fit=crop&w=1200&q=80" 
+                  alt="Bedsitter" 
+                  className="w-full h-48 object-cover"
+                />
+                <div className="p-4">
+                  <h3 className="text-lg font-semibold mb-2">Studio & Bedsitters</h3>
+                  <p className="text-muted-foreground text-sm mb-3">Affordable and functional spaces for singles</p>
+                  <Button asChild variant="outline" size="sm" className="w-full">
+                    <Link to="/properties?type=Bedsitter">View Options</Link>
+                  </Button>
+                </div>
+              </div>
+            </div>
+            
+            <div className="flex justify-center mt-8">
+              <Button asChild>
+                <Link to="/properties">View All Apartment Types</Link>
+              </Button>
             </div>
           </div>
         </section>
@@ -165,7 +230,7 @@ const Index = () => {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   >
-                    <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
+                    <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.277L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
                   </svg>
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Quality Properties</h3>
@@ -187,8 +252,8 @@ const Index = () => {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   >
-                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
-                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+                    <path d="M6 9H4.5a2 2 0 0 1 0-5H6" />
+                    <path d="M18 9h1.5a2 2 0 0 0 0-5H18" />
                     <path d="M4 22h16" />
                     <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
                     <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
