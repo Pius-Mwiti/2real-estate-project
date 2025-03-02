@@ -48,8 +48,10 @@ const PropertyDetails = () => {
     }).format(price);
   };
   
-  const handleContactAgent = (e: React.MouseEvent) => {
+  const handleContactAgent = (e: React.MouseEvent | React.FormEvent) => {
     e.preventDefault();
+    
+    if (!property) return;
     
     const subject = `Inquiry about ${property.title}`;
     const body = `Hi Ezekiel,\n\nI am interested in the ${property.title} listed for ${formatPrice(property.price)}/month located at ${property.location}.\n\nPlease provide more information about this property.\n\nThank you!`;
