@@ -1,3 +1,4 @@
+
 import React from 'react';
 import RealEstateHeader from '@/components/RealEstateHeader';
 import RealEstateFooter from '@/components/RealEstateFooter';

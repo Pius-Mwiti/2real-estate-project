@@ -292,8 +292,8 @@ const PropertyDetails = () => {
                       <Mail className="h-5 w-5 text-primary" />
                       <div>
                         <p className="text-sm text-muted-foreground">Email</p>
-                        <a href="mailto:piusmwiti254@gmail.com" className="font-medium hover:text-primary">
-                          piusmwiti254@gmail.com
+                        <a href="mailto:daviszack043@gmail.com" className="font-medium hover:text-primary">
+                          daviszack043@gmail.com
                         </a>
                       </div>
                     </div>

@@ -157,10 +157,10 @@ const RealEstateFooter = () => {
               <li className="flex items-center gap-3">
                 <Mail className="h-5 w-5 text-primary shrink-0" />
                 <a
-                  href="mailto:piusmwiti254@gmail.com"
+                  href="mailto:daviszack043@gmail.com"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
-                  piusmwiti254@gmail.com
+                  daviszack043@gmail.com
                 </a>
               </li>
             </ul>
