@@ -1,5 +1,8 @@
 import { Property, PropertyType } from "@/types/property";
 
+// Define the allowed locations
+const allowedLocations = ["Upper Hill", "Westlands", "Kilimani", "South B", "South C"];
+
 export const properties: Property[] = [
   {
     id: "1",
@@ -46,7 +49,7 @@ export const properties: Property[] = [
     title: "Spacious 2 Bedroom Apartment",
     description: "A well-maintained 2 bedroom apartment in a secure compound. It features a spacious living area, modern kitchen, and a small balcony with a view of the city.",
     price: 18000,
-    location: "Nairobi, Kileleshwa",
+    location: "Nairobi, South B",
     type: "2 Bedroom",
     bedrooms: 2,
     bathrooms: 1,
@@ -65,8 +68,8 @@ export const properties: Property[] = [
     id: "4",
     title: "Comfortable Bedsitter",
     description: "A clean and cozy bedsitter in a quiet neighborhood. Ideal for a single person or a couple. The room is spacious and comes with basic furniture.",
-    price: 7000,
-    location: "Nairobi, South B",
+    price: 9000,
+    location: "Nairobi, South C",
     type: "Bedsitter",
     bedrooms: 1,
     bathrooms: 1,
@@ -85,8 +88,8 @@ export const properties: Property[] = [
     id: "5",
     title: "Single Room with Shared Facilities",
     description: "A well-maintained single room in a shared apartment. The room is furnished with a bed, wardrobe, and study desk. Kitchen and bathroom facilities are shared.",
-    price: 5000,
-    location: "Nairobi, Kahawa",
+    price: 8000,
+    location: "Nairobi, South B",
     type: "Single Room",
     bedrooms: 1,
     bathrooms: 0.5,
@@ -106,7 +109,7 @@ export const properties: Property[] = [
     title: "Elegant 3 Bedroom Apartment",
     description: "A luxurious 3 bedroom apartment in a premium residential area. The apartment features high ceilings, large windows, and a spacious balcony with a stunning view.",
     price: 30000,
-    location: "Nairobi, Lavington",
+    location: "Nairobi, Kilimani",
     type: "3 Bedroom",
     bedrooms: 3,
     bathrooms: 2,
@@ -269,7 +272,7 @@ const newApartmentProperties: Property[] = [
     title: "Modern One Bedroom Unit",
     description: "This cozy one-bedroom apartment features a modern kitchen setup and bright living space. Perfect for singles or couples looking for affordable housing in a convenient location.",
     price: 15000,
-    location: "Nairobi, Eastlands",
+    location: "Nairobi, South C",
     type: "Apartment",
     bedrooms: 1,
     bathrooms: 1,
@@ -289,7 +292,7 @@ const newApartmentProperties: Property[] = [
     title: "Bright Studio with Large Windows",
     description: "A spacious studio apartment with wooden flooring and large windows allowing plenty of natural light. Features a compact kitchen area and modern finishes.",
     price: 12500,
-    location: "Nairobi, Ngara",
+    location: "Nairobi, Westlands",
     type: "Studio",
     bedrooms: 0,
     bathrooms: 1,
@@ -308,8 +311,8 @@ const newApartmentProperties: Property[] = [
     id: "16",
     title: "Affordable Bedsitter Unit",
     description: "Compact and affordable bedsitter with basic amenities. Includes a kitchenette and private bathroom. Ideal for students or young professionals.",
-    price: 8000,
-    location: "Nairobi, Ruaka",
+    price: 8500,
+    location: "Nairobi, South B",
     type: "Bedsitter",
     bedrooms: 1,
     bathrooms: 1,
@@ -329,7 +332,7 @@ const newApartmentProperties: Property[] = [
     title: "Premium Apartment Complex",
     description: "Luxury apartment in a modern high-rise building with premium amenities including a fitness center, rooftop lounge, and 24-hour security.",
     price: 35000,
-    location: "Nairobi, Westlands",
+    location: "Nairobi, Upper Hill",
     type: "Apartment",
     bedrooms: 2,
     bathrooms: 2,
@@ -367,7 +370,8 @@ const newApartmentProperties: Property[] = [
 ];
 
 const generateMoreProperties = (): Property[] => {
-  const locations = ["Nairobi, Parklands", "Nairobi, Roysambu", "Nairobi, Karen", "Nairobi, Langata", "Nairobi, Embakasi"];
+  // Only use allowed locations
+  const locations = ["Nairobi, Upper Hill", "Nairobi, Westlands", "Nairobi, Kilimani", "Nairobi, South B", "Nairobi, South C"];
   const types: PropertyType[] = ["House", "Apartment", "Single Room", "Bedsitter", "2 Bedroom", "3 Bedroom", "Studio"];
   const features = [
     "Parking", "Garden", "Security", "Water Tank", "Solar Heating",
@@ -400,14 +404,23 @@ const generateMoreProperties = (): Property[] => {
     
     const randomFeatures = [...features].sort(() => 0.5 - Math.random()).slice(0, Math.floor(Math.random() * 5) + 3);
     
-    const numImages = Math.floor(Math.random() * 3) + 2;
-    const propertyImages = [...randomImages].sort(() => 0.5 - Math.random()).slice(0, numImages);
+    // Set appropriate price based on property type
+    let price = 0;
+    if (type === "Bedsitter" || type === "Single Room") {
+      price = Math.floor(Math.random() * 2000) + 8000; // 8000-10000
+    } else if (type === "Studio" || bedrooms === 1) {
+      price = Math.floor(Math.random() * 5000) + 15000; // 15000-20000
+    } else if (bedrooms === 2) {
+      price = Math.floor(Math.random() * 5000) + 20000; // 20000-25000
+    } else {
+      price = Math.floor(Math.random() * 10000) + 25000; // 25000-35000
+    }
     
     additionalProperties.push({
       id: i.toString(),
       title: `${type} in ${locations[Math.floor(Math.random() * locations.length)]}`,
       description: "This property offers comfortable living with modern amenities in a convenient location. Perfect for professionals or families looking for a place to call home.",
-      price: Math.floor(Math.random() * 25000) + 5000,
+      price,
       location: locations[Math.floor(Math.random() * locations.length)],
       type,
       bedrooms,
@@ -417,7 +430,7 @@ const generateMoreProperties = (): Property[] => {
             type === "Studio" ? Math.floor(Math.random() * 200) + 400 :
             Math.floor(Math.random() * 1000) + 700,
       features: randomFeatures,
-      images: propertyImages,
+      images: [...randomImages].sort(() => 0.5 - Math.random()).slice(0, Math.floor(Math.random() * 3) + 2),
       isFeatured: Math.random() > 0.7,
       isAvailable: Math.random() > 0.2,
       createdAt: new Date(Date.now() - Math.floor(Math.random() * 10000000000)).toISOString().split('T')[0]

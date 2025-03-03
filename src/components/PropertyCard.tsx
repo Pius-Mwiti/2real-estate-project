@@ -28,8 +28,8 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
     const subject = `Inquiry about ${property.title}`;
     const body = `Hello,\n\nI am interested in the ${property.title} listed for ${formatPrice(property.price)}/month located at ${property.location}.\n\nPlease provide more information about this property.\n\nThank you!`;
     
-    // Open default email client
-    window.location.href = `mailto:piusmwiti254@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    // Open default email client with updated email
+    window.location.href = `mailto:daviszack043@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     
     // Show toast notification
     toast.success("Opening email client...", {

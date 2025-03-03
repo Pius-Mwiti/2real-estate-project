@@ -56,7 +56,7 @@ const PropertyDetails = () => {
     const subject = `Inquiry about ${property.title}`;
     const body = `Hi Ezekiel,\n\nI am interested in the ${property.title} listed for ${formatPrice(property.price)}/month located at ${property.location}.\n\nPlease provide more information about this property.\n\nThank you!`;
     
-    window.location.href = `mailto:piusmwiti254@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:daviszack043@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     
     toast.success("Opening email client...", {
       description: "Contact form is being prepared in your default email app."
