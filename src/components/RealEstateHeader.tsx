@@ -7,6 +7,15 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const RealEstateHeader = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const closeDropdown = () => {
+    setIsDropdownOpen(false);
+  };
   
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -23,55 +32,71 @@ const RealEstateHeader = () => {
           <Link to="/" className="text-sm font-medium transition-colors hover:text-primary">
             Home
           </Link>
-          <div className="relative group">
-            <button className="flex items-center gap-1 text-sm font-medium transition-colors hover:text-primary">
+          <div className="relative">
+            <button 
+              className="flex items-center gap-1 text-sm font-medium transition-colors hover:text-primary"
+              onClick={toggleDropdown}
+              aria-expanded={isDropdownOpen}
+              aria-haspopup="true"
+            >
               Properties
               <ChevronDown className="h-4 w-4" />
             </button>
-            <div className="absolute left-0 top-full z-50 mt-2 hidden w-48 rounded-md border bg-card p-2 shadow-md group-hover:block">
-              <Link 
-                to="/properties?type=House" 
-                className="block rounded-sm px-3 py-2 text-sm hover:bg-muted"
+            {isDropdownOpen && (
+              <div 
+                className="absolute left-0 top-full z-50 mt-2 w-48 rounded-md border bg-card p-2 shadow-md"
               >
-                Houses
-              </Link>
-              <Link 
-                to="/properties?type=Apartment" 
-                className="block rounded-sm px-3 py-2 text-sm hover:bg-muted"
-              >
-                Apartments
-              </Link>
-              <Link 
-                to="/properties?type=Single Room" 
-                className="block rounded-sm px-3 py-2 text-sm hover:bg-muted"
-              >
-                Single Rooms
-              </Link>
-              <Link 
-                to="/properties?type=Bedsitter" 
-                className="block rounded-sm px-3 py-2 text-sm hover:bg-muted"
-              >
-                Bedsitters
-              </Link>
-              <Link 
-                to="/properties?type=2 Bedroom" 
-                className="block rounded-sm px-3 py-2 text-sm hover:bg-muted"
-              >
-                2 Bedrooms
-              </Link>
-              <Link 
-                to="/properties?type=3 Bedroom" 
-                className="block rounded-sm px-3 py-2 text-sm hover:bg-muted"
-              >
-                3 Bedrooms
-              </Link>
-              <Link 
-                to="/properties" 
-                className="block rounded-sm px-3 py-2 text-sm hover:bg-muted"
-              >
-                All Properties
-              </Link>
-            </div>
+                <Link 
+                  to="/properties?type=House" 
+                  className="block rounded-sm px-3 py-2 text-sm hover:bg-muted"
+                  onClick={closeDropdown}
+                >
+                  Houses
+                </Link>
+                <Link 
+                  to="/properties?type=Apartment" 
+                  className="block rounded-sm px-3 py-2 text-sm hover:bg-muted"
+                  onClick={closeDropdown}
+                >
+                  Apartments
+                </Link>
+                <Link 
+                  to="/properties?type=Single Room" 
+                  className="block rounded-sm px-3 py-2 text-sm hover:bg-muted"
+                  onClick={closeDropdown}
+                >
+                  Single Rooms
+                </Link>
+                <Link 
+                  to="/properties?type=Bedsitter" 
+                  className="block rounded-sm px-3 py-2 text-sm hover:bg-muted"
+                  onClick={closeDropdown}
+                >
+                  Bedsitters
+                </Link>
+                <Link 
+                  to="/properties?type=2 Bedroom" 
+                  className="block rounded-sm px-3 py-2 text-sm hover:bg-muted"
+                  onClick={closeDropdown}
+                >
+                  2 Bedrooms
+                </Link>
+                <Link 
+                  to="/properties?type=3 Bedroom" 
+                  className="block rounded-sm px-3 py-2 text-sm hover:bg-muted"
+                  onClick={closeDropdown}
+                >
+                  3 Bedrooms
+                </Link>
+                <Link 
+                  to="/properties" 
+                  className="block rounded-sm px-3 py-2 text-sm hover:bg-muted"
+                  onClick={closeDropdown}
+                >
+                  All Properties
+                </Link>
+              </div>
+            )}
           </div>
           <Link to="/about" className="text-sm font-medium transition-colors hover:text-primary">
             About
