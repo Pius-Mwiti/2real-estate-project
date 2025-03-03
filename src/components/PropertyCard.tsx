@@ -63,7 +63,7 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
             {property.isAvailable ? "Available" : "Rented"}
           </Badge>
           
-          <Badge className="absolute bottom-2 left-2 bg-background/80 backdrop-blur-sm">
+          <Badge className="absolute bottom-2 left-2 bg-blue-600 text-white font-medium">
             {formatPrice(property.price)}/month
           </Badge>
         </Link>
