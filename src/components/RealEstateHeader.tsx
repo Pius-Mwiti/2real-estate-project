@@ -7,22 +7,13 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const RealEstateHeader = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
-
-  const closeDropdown = () => {
-    setIsDropdownOpen(false);
-  };
   
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-2">
           <Link to="/" className="flex items-center gap-2 font-display text-xl font-bold">
-            <span className="text-primary">Smart Homes</span>
+            <span className="text-primary">Wangila</span>
             <span>Real Estate</span>
           </Link>
         </div>
@@ -32,71 +23,55 @@ const RealEstateHeader = () => {
           <Link to="/" className="text-sm font-medium transition-colors hover:text-primary">
             Home
           </Link>
-          <div className="relative">
-            <button 
-              className="flex items-center gap-1 text-sm font-medium transition-colors hover:text-primary"
-              onClick={toggleDropdown}
-              aria-expanded={isDropdownOpen}
-              aria-haspopup="true"
-            >
+          <div className="relative group">
+            <button className="flex items-center gap-1 text-sm font-medium transition-colors hover:text-primary">
               Properties
               <ChevronDown className="h-4 w-4" />
             </button>
-            {isDropdownOpen && (
-              <div 
-                className="absolute left-0 top-full z-50 mt-2 w-48 rounded-md border bg-card p-2 shadow-md"
+            <div className="absolute left-0 top-full z-50 mt-2 hidden w-48 rounded-md border bg-card p-2 shadow-md group-hover:block">
+              <Link 
+                to="/properties?type=House" 
+                className="block rounded-sm px-3 py-2 text-sm hover:bg-muted"
               >
-                <Link 
-                  to="/properties?type=House" 
-                  className="block rounded-sm px-3 py-2 text-sm hover:bg-muted"
-                  onClick={closeDropdown}
-                >
-                  Houses
-                </Link>
-                <Link 
-                  to="/properties?type=Apartment" 
-                  className="block rounded-sm px-3 py-2 text-sm hover:bg-muted"
-                  onClick={closeDropdown}
-                >
-                  Apartments
-                </Link>
-                <Link 
-                  to="/properties?type=Single Room" 
-                  className="block rounded-sm px-3 py-2 text-sm hover:bg-muted"
-                  onClick={closeDropdown}
-                >
-                  Single Rooms
-                </Link>
-                <Link 
-                  to="/properties?type=Bedsitter" 
-                  className="block rounded-sm px-3 py-2 text-sm hover:bg-muted"
-                  onClick={closeDropdown}
-                >
-                  Bedsitters
-                </Link>
-                <Link 
-                  to="/properties?type=2 Bedroom" 
-                  className="block rounded-sm px-3 py-2 text-sm hover:bg-muted"
-                  onClick={closeDropdown}
-                >
-                  2 Bedrooms
-                </Link>
-                <Link 
-                  to="/properties?type=3 Bedroom" 
-                  className="block rounded-sm px-3 py-2 text-sm hover:bg-muted"
-                  onClick={closeDropdown}
-                >
-                  3 Bedrooms
-                </Link>
-                <Link 
-                  to="/properties" 
-                  className="block rounded-sm px-3 py-2 text-sm hover:bg-muted"
-                  onClick={closeDropdown}
-                >
-                  All Properties
-                </Link>
-              </div>
-            )}
+                Houses
+              </Link>
+              <Link 
+                to="/properties?type=Apartment" 
+                className="block rounded-sm px-3 py-2 text-sm hover:bg-muted"
+              >
+                Apartments
+              </Link>
+              <Link 
+                to="/properties?type=Single Room" 
+                className="block rounded-sm px-3 py-2 text-sm hover:bg-muted"
+              >
+                Single Rooms
+              </Link>
+              <Link 
+                to="/properties?type=Bedsitter" 
+                className="block rounded-sm px-3 py-2 text-sm hover:bg-muted"
+              >
+                Bedsitters
+              </Link>
+              <Link 
+                to="/properties?type=2 Bedroom" 
+                className="block rounded-sm px-3 py-2 text-sm hover:bg-muted"
+              >
+                2 Bedrooms
+              </Link>
+              <Link 
+                to="/properties?type=3 Bedroom" 
+                className="block rounded-sm px-3 py-2 text-sm hover:bg-muted"
+              >
+                3 Bedrooms
+              </Link>
+              <Link 
+                to="/properties" 
+                className="block rounded-sm px-3 py-2 text-sm hover:bg-muted"
+              >
+                All Properties
+              </Link>
+            </div>
           </div>
           <Link to="/about" className="text-sm font-medium transition-colors hover:text-primary">
             About
@@ -122,7 +97,7 @@ const RealEstateHeader = () => {
             <SheetContent side="right">
               <div className="px-2 py-6">
                 <Link to="/" className="flex items-center gap-2 font-display text-xl font-bold mb-6">
-                  <span className="text-primary">Smart Homes</span>
+                  <span className="text-primary">Wangila</span>
                   <span>Real Estate</span>
                 </Link>
                 <nav className="flex flex-col gap-4">

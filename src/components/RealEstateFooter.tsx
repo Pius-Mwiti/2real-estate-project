@@ -12,7 +12,7 @@ const RealEstateFooter = () => {
           <div>
             <Link to="/" className="inline-block mb-4">
               <div className="flex items-center gap-2 font-display text-xl font-bold">
-                <span className="text-primary">Smart Homes</span>
+                <span className="text-primary">Wangila</span>
                 <span>Real Estate</span>
               </div>
             </Link>
@@ -157,10 +157,10 @@ const RealEstateFooter = () => {
               <li className="flex items-center gap-3">
                 <Mail className="h-5 w-5 text-primary shrink-0" />
                 <a
-                  href="mailto:daviszack043@gmail.com"
+                  href="mailto:info@wangilarealestate.com"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
-                  daviszack043@gmail.com
+                  info@wangilarealestate.com
                 </a>
               </li>
             </ul>
@@ -171,7 +171,7 @@ const RealEstateFooter = () => {
       <div className="border-t border-muted py-6">
         <div className="container flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            © {currentYear} Smart Homes Real Estate. All rights reserved.
+            © {currentYear} Wangila Real Estate. All rights reserved.
           </p>
           <div className="flex items-center gap-4 text-sm text-muted-foreground">
             <a href="#" className="hover:text-primary transition-colors">

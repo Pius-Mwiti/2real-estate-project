@@ -31,14 +31,6 @@ const propertyCategories = [
   },
 ];
 
-const formatPrice = (price: number) => {
-  return new Intl.NumberFormat("en-KE", {
-    style: "currency",
-    currency: "KES",
-    maximumFractionDigits: 0,
-  }).format(price);
-};
-
 const Index = () => {
   const [featuredProperties, setFeaturedProperties] = useState<Property[]>([]);
   
@@ -56,7 +48,7 @@ const Index = () => {
         <section className="bg-muted/30 border-b">
           <div className="container mx-auto px-4 py-16 md:py-24 flex flex-col md:flex-row md:items-center gap-8">
             <div className="md:w-1/2 space-y-6">
-              <Badge variant="outline" className="mb-4 animate-fade-in">Welcome to Smart Homes Real Estate</Badge>
+              <Badge variant="outline" className="mb-4 animate-fade-in">Welcome to Wangila Real Estate</Badge>
               <h1 className="text-4xl md:text-5xl font-bold tracking-tight animate-fade-in [animation-delay:200ms]">
                 Find Your Perfect Rental Property in Kenya
               </h1>
@@ -76,14 +68,14 @@ const Index = () => {
             <div className="md:w-1/2 animate-fade-in [animation-delay:800ms]">
               <div className="relative rounded-lg overflow-hidden shadow-xl">
                 <img 
-                  src="/lovable-uploads/c8a7f725-a66c-4d13-a58e-e17d8a0f7033.png" 
-                  alt="Modern apartment building" 
+                  src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80" 
+                  alt="Property showcase" 
                   className="w-full h-auto object-cover aspect-[4/3]"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
                   <Badge className="bg-primary mb-2">Featured</Badge>
-                  <h3 className="text-xl font-bold text-white mb-2">Modern Apartment Living</h3>
-                  <p className="text-white/80 text-sm">{formatPrice(15000)}/month</p>
+                  <h3 className="text-xl font-bold text-white mb-2">Luxury Living Spaces</h3>
+                  <p className="text-white/80 text-sm">Starting at KES 15,000/month</p>
                 </div>
               </div>
             </div>
@@ -127,87 +119,6 @@ const Index = () => {
           </div>
         </section>
         
-        {/* Apartment Types */}
-        <section className="bg-muted/30 py-16">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <Badge variant="outline" className="mb-3">Apartment Types</Badge>
-              <h2 className="text-3xl font-bold mb-4">Browse Our Apartment Collection</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                From luxurious two-bedroom units to cozy studio spaces
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div className="bg-card rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
-                <div className="relative">
-                  <img 
-                    src="/lovable-uploads/3d311218-a48e-42f6-89b1-2a196f883af6.png" 
-                    alt="Two Bedroom Apartment" 
-                    className="w-full h-48 object-cover"
-                  />
-                  <div className="absolute top-0 right-0 bg-primary text-white px-3 py-1 rounded-bl-lg font-semibold">
-                    {formatPrice(25000)}/month
-                  </div>
-                </div>
-                <div className="p-4">
-                  <h3 className="text-lg font-semibold mb-2">Two Bedroom Apartments</h3>
-                  <p className="text-muted-foreground text-sm mb-3">Spacious living for small families and professionals</p>
-                  <Button asChild variant="outline" size="sm" className="w-full">
-                    <Link to="/properties?type=Apartment&bedrooms=2">View Options</Link>
-                  </Button>
-                </div>
-              </div>
-              
-              <div className="bg-card rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
-                <div className="relative">
-                  <img 
-                    src="/lovable-uploads/d940c907-a13d-4729-ab95-ca18f5d9ab73.png" 
-                    alt="One Bedroom Apartment" 
-                    className="w-full h-48 object-cover"
-                  />
-                  <div className="absolute top-0 right-0 bg-primary text-white px-3 py-1 rounded-bl-lg font-semibold">
-                    {formatPrice(18000)}/month
-                  </div>
-                </div>
-                <div className="p-4">
-                  <h3 className="text-lg font-semibold mb-2">One Bedroom Apartments</h3>
-                  <p className="text-muted-foreground text-sm mb-3">Perfect for individuals or couples</p>
-                  <Button asChild variant="outline" size="sm" className="w-full">
-                    <Link to="/properties?type=Apartment&bedrooms=1">View Options</Link>
-                  </Button>
-                </div>
-              </div>
-              
-              <div className="bg-card rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
-                <div className="relative">
-                  <img 
-                    src="/lovable-uploads/fb5ff5dd-7611-488f-a672-f144d3bb7133.png" 
-                    alt="Bedsitter" 
-                    className="w-full h-48 object-cover"
-                  />
-                  <div className="absolute top-0 right-0 bg-primary text-white px-3 py-1 rounded-bl-lg font-semibold">
-                    {formatPrice(9000)}/month
-                  </div>
-                </div>
-                <div className="p-4">
-                  <h3 className="text-lg font-semibold mb-2">Studio & Bedsitters</h3>
-                  <p className="text-muted-foreground text-sm mb-3">Affordable and functional spaces for singles</p>
-                  <Button asChild variant="outline" size="sm" className="w-full">
-                    <Link to="/properties?type=Bedsitter">View Options</Link>
-                  </Button>
-                </div>
-              </div>
-            </div>
-            
-            <div className="flex justify-center mt-8">
-              <Button asChild>
-                <Link to="/properties">View All Apartment Types</Link>
-              </Button>
-            </div>
-          </div>
-        </section>
-        
         {/* Featured Properties */}
         <section className="bg-muted/30 py-16">
           <div className="container mx-auto px-4">
@@ -234,7 +145,7 @@ const Index = () => {
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <Badge variant="outline" className="mb-3">Why Choose Us</Badge>
-              <h2 className="text-3xl font-bold mb-4">The Smart Homes Real Estate Advantage</h2>
+              <h2 className="text-3xl font-bold mb-4">The Wangila Real Estate Advantage</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
                 We strive to provide exceptional service and value to all our clients
               </p>
@@ -254,7 +165,7 @@ const Index = () => {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   >
-                    <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.277L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
+                    <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
                   </svg>
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Quality Properties</h3>
@@ -276,8 +187,8 @@ const Index = () => {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   >
-                    <path d="M6 9H4.5a2 2 0 0 1 0-5H6" />
-                    <path d="M18 9h1.5a2 2 0 0 0 0-5H18" />
+                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
                     <path d="M4 22h16" />
                     <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
                     <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
@@ -322,7 +233,7 @@ const Index = () => {
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl font-bold mb-4">Ready to Find Your Dream Home?</h2>
             <p className="max-w-2xl mx-auto mb-8 text-primary-foreground/90">
-              Contact us today to schedule a viewing or discuss your specific requirements
+              Contact Ezekiel Wangila today to schedule a viewing or discuss your specific requirements
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Button asChild size="lg" variant="secondary">

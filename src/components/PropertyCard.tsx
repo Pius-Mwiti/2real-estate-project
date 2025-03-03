@@ -1,11 +1,9 @@
 
 import { Link } from "react-router-dom";
-import { Bath, Bed, MapPin, Ruler, Mail } from "lucide-react";
+import { Bath, Bed, MapPin, Ruler } from "lucide-react";
 import { Property } from "@/types/property";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
 
 interface PropertyCardProps {
   property: Property;
@@ -18,23 +16,6 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
       currency: "KES",
       maximumFractionDigits: 0,
     }).format(price);
-  };
-  
-  const handleContactAgent = (e: React.MouseEvent | React.FormEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    
-    // Create email subject and body
-    const subject = `Inquiry about ${property.title}`;
-    const body = `Hello,\n\nI am interested in the ${property.title} listed for ${formatPrice(property.price)}/month located at ${property.location}.\n\nPlease provide more information about this property.\n\nThank you!`;
-    
-    // Open default email client with updated email
-    window.location.href = `mailto:daviszack043@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    
-    // Show toast notification
-    toast.success("Opening email client...", {
-      description: "Contact form is being prepared in your default email app."
-    });
   };
   
   return (
@@ -63,7 +44,7 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
             {property.isAvailable ? "Available" : "Rented"}
           </Badge>
           
-          <Badge className="absolute bottom-2 left-2 bg-blue-600 text-white font-medium">
+          <Badge className="absolute bottom-2 left-2 bg-background/80 backdrop-blur-sm">
             {formatPrice(property.price)}/month
           </Badge>
         </Link>
@@ -103,7 +84,7 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
             </div>
           </div>
           
-          <div className="flex flex-wrap gap-1 mb-3">
+          <div className="flex flex-wrap gap-1">
             {property.features.slice(0, 3).map((feature, index) => (
               <Badge variant="outline" key={index} className="font-normal text-xs">
                 {feature}
@@ -115,15 +96,6 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
               </Badge>
             )}
           </div>
-          
-          <Button 
-            variant="outline" 
-            size="sm" 
-            className="w-full flex items-center gap-2"
-            onClick={handleContactAgent}
-          >
-            <Mail className="h-4 w-4" /> Contact Agent
-          </Button>
         </div>
       </CardContent>
     </Card>
