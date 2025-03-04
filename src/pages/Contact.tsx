@@ -1,7 +1,7 @@
 
-import { RealEstateHeader } from "@/components/RealEstateHeader";
-import { RealEstateFooter } from "@/components/RealEstateFooter";
 import { useRef, useEffect } from "react";
+import RealEstateHeader from "@/components/RealEstateHeader";
+import RealEstateFooter from "@/components/RealEstateFooter";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

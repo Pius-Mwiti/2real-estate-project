@@ -1,7 +1,6 @@
-
 import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { Bath, Bed, Home, MapPin, Ruler } from "lucide-react";
+import { Bath, Bed, Home, MapPin, Ruler, Phone, User, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -12,7 +11,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Property } from "@/types/property";
-import { getPropertyById } from "@/data/properties";
+import { getPropertyById, allProperties } from "@/data/properties";
 import RealEstateHeader from "@/components/RealEstateHeader";
 import RealEstateFooter from "@/components/RealEstateFooter";
 import PropertyCard from "@/components/PropertyCard";
@@ -38,9 +37,9 @@ const PropertyDetails = () => {
         setProperty(foundProperty);
         
         // Get similar properties (same type, different ID)
-        const similar = getPropertyById("all")
-          ?.filter(p => p.type === foundProperty.type && p.id !== foundProperty.id)
-          .slice(0, 3) || [];
+        const similar = allProperties
+          .filter(p => p.type === foundProperty.type && p.id !== foundProperty.id)
+          .slice(0, 3);
         
         setSimilarProperties(similar);
       }
